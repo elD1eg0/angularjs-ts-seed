@@ -1,12 +1,15 @@
-import Common       from './common/common';
-import Example      from './example/example';
-import Material      from './material/material';
+import Common    from './common/common';
+import Example   from './example/example';
+import Material  from './material/material';
+import Markdown  from './markdown/markdown';
 import Main      from './main/main';
 import Dashboard from './dashboard/dashboard';
-import Message from './message/message';
-import Profile from './profile/profile';
-import Table from './table/table';
+import Message   from './message/message';
+import Profile   from './profile/profile';
+import Showcase  from './showcase/showcase';
+import Table     from './table/table';
 import Product from './product/product';
+
 
 let components = angular.module('app.components', [
   Common,
@@ -15,6 +18,7 @@ let components = angular.module('app.components', [
   Dashboard,
   Message,
   Profile,
+  Showcase,
   Table,
   Product,
 
