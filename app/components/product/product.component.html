@@ -1,0 +1,87 @@
+<!-- TODO: Add validations -->
+<md-tabs md-dynamic-height md-border-bottom>
+  <md-tab label="Insert product">
+    <form ng-submit="$ctrl.addProduct()" novalidate name="productForm">
+      <md-content md-theme="dark" class="md-padding" layout="row" layout-sm="column">
+        <md-input-container>
+          <label for="drug-name">Drug Name</label>
+          <input id="drug-name" name="drugName" ng-model="$ctrl.drugName" minlength="3" maxlength="11" ng-pattern="/^[a-zA-Z]{3,}/"
+          required>
+          <div ng-messages="productForm.drugName.$error">
+            <div ng-message="required"> Please insert a user name</div>
+            <div ng-message="drugNameError && required"> You didn't enter a valid drug name</div>
+            <div ng-message="minlength"> Your field is too short</div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label for="ndc">NDC</label>
+          <input tsfn-validation-sync id="ndc" name="ndc" ng-model="$ctrl.ndc" ng-disabled="!$ctrl.drugName.length" minlength="4" maxlength="13"
+          required>
+          <div ng-messages="productForm.ndc.$error">
+            <div ng-message="required"> Please insert a ndc</div>
+            <div ng-message="ndcError && required"> You didn't enter a valid ndc</div>
+            <div ng-message="minlength"> Your field is too short</div>
+          </div>
+        </md-input-container>
+      </md-content>
+      <md-content class="md-padding">
+        <div layout layout-sm="column">
+          <md-input-container flex>
+            <label for="upc">UPC</label>
+            <input id="upc" ng-model="$ctrl.upc">
+          </md-input-container>
+          <md-input-container flex>
+            <label for="wic">Wic</label>
+            <input id="wic" ng-model="$ctrl.wic">
+          </md-input-container>
+          <md-input-container flex>
+            <label for="quick-code">Quick code</label>
+            <input id="quick-code" ng-model="$ctrl.quickCode">
+          </md-input-container>
+        </div>
+        <div>
+          <md-input-container flex="80">
+            <md-checkbox ng-model="$ctrl.preferredDrug">Preferred Drug</md-checkbox>
+            <!--<md-check ng-model="identifiers">
+              <md-option ng-value="drugName" ng-repeat="product in $ctrl.products">{{ product.identifiers }}</md-option>
+            </md-select>-->
+          </md-input-container>
+          </div>
+          <div layout layout-sm="column">
+          <md-input-container flex="20">
+            <label for="manufacturer">Manufacturer</label>
+            <input id="manufacturer" ng-model="$ctrl.manufacturer">
+          </md-input-container>
+          <md-input-container flex="20">
+            <label for="expiration-date">Expiration Date</label>
+            <input id="expiration-date" type="date" ng-model="$ctrl.expirationDate">
+          </md-input-container>
+          <!--</div>-->
+          <!--<div layout layout-sm="column">-->
+          <md-input-container flex="40">
+            <label for="total-pkg-qty">Total package quantity</label>
+            <input id="total-pkg-qty" ng-model="$ctrl.totalPkgQty">
+          </md-input-container>
+        </div>
+        <div>
+          <md-input-container flex>
+            <label for="storage-requirement">Storage Requirement</label>
+            <input id="storage-requirement" ng-model="$ctrl.product.storageRequirement">
+          </md-input-container>
+        </div>
+        <md-input-container flex>
+          <label for="product-description">Information</label>
+          <textarea id="product-description" ng-model="$ctrl.product.productDescription" columns="1" md-maxlength="150"></textarea>
+        </md-input-container>
+        <md-button class="md-fab md-wayrn md-mini" ng-disabled="!productForm.drugName.$valid || !productForm.ndc.$valid" type="submit"
+        onclick="reset()">
+          <i class="material-icons">add</i>
+        </md-button>
+        <md-button type="reset" layout-padding class="md-raised">Reset</md-button>
+      </md-content>
+    </form>
+  </md-tab>
+  <md-tab label="product list">
+    <tab-list></tab-list>
+  </md-tab>
+</md-tabs>

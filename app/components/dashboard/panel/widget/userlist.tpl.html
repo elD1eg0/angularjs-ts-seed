@@ -1,0 +1,66 @@
+<div ng-controller="UserlistController as vm">
+  <md-sidenav md-is-locked-open="true" md-component-id="left" class="md-whiteframe-4dp">
+    <md-button class="md-raised" flex="20" layout-align="center end" ng-hide="vm.isClicked==true" ng-click="vm.isClicked=true">
+      Select
+    </md-button>
+    <md-button class="md-fab" ng-show="vm.isClicked==true" ng-click="vm.resetCB()">
+      <i class="material-icons">done</i>
+    </md-button>
+    <div layout="row" ng-show="vm.isClicked==true">
+      <h4>{{vm.remaining}} of {{vm.users.length}} remaining</h4>
+      <md-button class="md-primary" ng-click="vm.toggleAll()">Toggle All
+      </md-button>
+    </div>
+
+    <!--<md-button class="md-icon-button md-primary" aria-label="Settings">
+        <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+      </md-button>-->
+
+    <md-list ng-repeat="user in vm.users" ng-model="user.name">
+
+      <!-- List item #1 -->
+      <md-list-item>
+        <md-checkbox ng-show="vm.isClicked" ng-model="user.done"></md-checkbox>
+        <md-button ng-click="vm.selectUser(user)" ng-class="{'selected' : user === vm.selected }" style="text-transform: none">
+          <md-user-avatar> <img ng-src="{{user.img}}" class="md-user-avatar" alt=""></md-user-avatar>
+          {{user.name}}
+        </md-button>
+      </md-list-item>
+
+    </md-list>
+    <md-button class="md-raised" ng-show="vm.checked(vm.users)" ng-click="vm.archive()">
+      Delete
+    </md-button>
+    <form ng-submit="vm.addUser()" novalidate name="usersForm">
+      <div layout="row" flex>
+        <md-input-container flex ng-class="{'md-input-invalid':usersForm.userName.$error.required && usersForm.$submitted}">
+          <label layout="row" for="user-name">Write user name here...</label>
+          <input ng-model="vm.userName"  name="userName" id="user-name" minlength="5" maxlength="20" required ng-pattern="/^[a-zA-Z]{5,}/">
+          <div ng-messages="usersForm.userName.$error">
+            <div ng-message="required"> Please insert a user name</div>
+            <div ng-message="pattern && required"> You didn't enter a valid user name</div>
+            <div ng-message="minlength"> Your field is too short</div>
+          </div>
+        </md-input-container>
+        <md-input-container flex ng-class="{'md-input-invalid':usersForm.userText.$error.required && tasksForm.$submitted}">
+          <label layout="row" for="user-text">Write user description here...</label>
+          <input ng-model="vm.userText" ng-disabled="!vm.userName.length" name="userText" id="user-text" minlength="20" maxlength="180" required ng-pattern="/^[a-zA-Z]{5,}/">
+          <div ng-messages="usersForm.userText.$error">
+            <div ng-message="required && pattern"> You did not enter a valid user description</div>
+            <div ng-message="minlength"> Your field is too short</div>
+          </div>
+        </md-input-container>
+        <md-input-container flex ng-class="{'md-input-invalid':usersForm.userName.$error.required && tasksForm.$submitted}">
+          <div>
+            <input type="file" file-model="vm.myFile" />
+            <md-button ng-click="vm.uploadFile(vm.myFile)">upload me</md-button>
+          </div>
+        </md-input-container>
+        <md-button class="md-fab md-wayrn md-mini" ng-disabled="!usersForm.userText.$valid || !usersForm.userName.$valid" type="submit">
+          <i class="material-icons">add</i>
+        </md-button>
+      </div>
+    </form>
+  </md-sidenav>
+
+</div>

@@ -1,0 +1,42 @@
+<md-dialog flex="50" aria-label="label">
+  <md-dialog-content>
+    <div layout="column" layout-margin>
+      <md-content md-theme="dark" class="md-padding" layout="row" layout-sm="column">
+        <div class="md-body-2"flex="50">
+          Drug Name
+          <p>{{dialogCtrl.locals.selected.drugName}}</p>
+        </div>
+        <div flex="50">
+          NDC
+          <p>{{dialogCtrl.locals.selected.ndc}}</p>
+        </div>
+      </md-content>
+      <md-content class="md-padding">
+        <div layout layout-sm="column">
+          <div flex="30">UPC
+            <p>{{dialogCtrl.locals.selected.upc}}</p>
+          </div>
+          <div flex="30">WIC
+            <p>{{dialogCtrl.locals.selected.wic}}</p>
+          </div>
+          <div flex="30">Quick Code
+            <p>{{dialogCtrl.locals.selected.quickCode | example}}</p>
+          </div>
+        </div>
+      </md-content>
+      <md-content class="md-padding">
+        <div layout layout-sm="column">
+          <div flex="30">Manufacturer
+            <p>{{dialogCtrl.locals.selected.manufacturer}}</p>
+          </div>
+          <div flex="30">Expiration Date
+            <p>{{dialogCtrl.locals.selected.expirationDate | date:'longDate'}}</p>
+          </div>
+          <div flex="40">Total Package Quantity
+            <p>{{dialogCtrl.locals.selected.totalPkgQty}}</p>
+          </div>
+        </div>
+      </md-content>
+    </div>
+  </md-dialog-content>
+</md-dialog>

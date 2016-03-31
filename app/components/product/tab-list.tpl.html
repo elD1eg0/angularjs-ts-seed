@@ -1,0 +1,39 @@
+<div class="table-responsive-vertical md-whiteframe-z1">
+  <div layout-sm="column" flex class="md-padding page-content">
+    <md-input-container flex="30">
+      <label for="search-field">Select search field</label>
+      <md-select id="search-field" ng-model="$ctrl.dropList" ng-model-options="{trackBy: '$value'}">
+        <md-option ng-repeat="header in $ctrl.headers" value="{{header}}">
+          {{header}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <md-input-container flex>
+      <label for="search-text">Insert searching field </label>
+      <input id="search-text" type="search" ng-model="$ctrl.searchText.$">
+    </md-input-container>
+  </div>
+  <table id="table" class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Drug Name</th>
+        <th>Total PkgQty </th>
+        <th>Manufacturer</th>
+        <th>NDC</th>
+        <th>Preferred Drug</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="product in $ctrl.products track by $index" ng-click="$ctrl.selectProduct(product)">
+        <td data-title="ID">{{$index + 1}}</td>
+        <td data-title="Drug Name">{{product.drugName}}</td>
+        <td data-title="Total PkgQty">{{product.totalPkgQty}}</td>
+        <td data-title="Manufacturer">{{product.manufacturer}}</td>
+        <td data-title="NDC">{{product.ndc}}</td>
+        <td data-title="Preferred Drug">
+          <i class="material-icons" ng-show="product.preferredDrug">done</i> </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
